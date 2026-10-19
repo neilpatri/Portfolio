@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neil Patrick Y. Atienza | IT Student &amp; Software Developer</title>
+<meta name="description" content="Portfolio of Neil Patrick Y. Atienza, a fourth-year BS Information Technology student at Romblon State University building web and mobile applications.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Neil Patrick Y. Atienza | IT Student &amp; Software Developer">
+<meta property="og:description" content="Web and mobile application projects, tech stack, and certificates.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111'/%3E%3Ctext x='32' y='43' font-family='Arial' font-weight='700' font-size='28' text-anchor='middle' fill='%23fff'%3ENP%3C/text%3E%3C/svg%3E">
+<script>
+  // Theme: saved choice first, otherwise system preference. Runs before paint to avoid a flash.
+  try {
+    const t = localStorage.getItem('theme');
+    if (t === 'dark' || (!t && matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
+  } catch (e) {}
+</script>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: { extend: { fontFamily: {
+      sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+      mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace']
+    } } }
+  };
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style type="text/tailwindcss">
+  @layer base {
+    html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+    body { @apply bg-white text-neutral-900 antialiased font-sans dark:bg-neutral-950 dark:text-neutral-100; }
+    :focus-visible { @apply outline-2 outline-offset-2 outline-neutral-900 dark:outline-white; outline-style: solid; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+  }
+  @layer components {
+    .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg border px-5 py-2.5 text-sm font-semibold transition-colors; }
+    .btn-primary { @apply btn border-neutral-900 bg-neutral-900 text-white hover:bg-neutral-700 dark:border-white dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-300; }
+    .btn-outline { @apply btn border-neutral-300 hover:bg-neutral-100 dark:border-neutral-700 dark:hover:bg-neutral-900; }
+    .card { @apply rounded-xl border border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900; }
+    .card-hover { @apply transition duration-200 hover:-translate-y-0.5 hover:border-neutral-400 dark:hover:border-neutral-600; }
+    .h2 { @apply text-3xl font-extrabold tracking-tight sm:text-4xl; }
+    .muted { @apply text-neutral-600 dark:text-neutral-400; }
+    .nav-link { @apply rounded-md px-3 py-2 text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white; }
+    .badge { @apply inline-flex items-center gap-1 rounded-full border border-neutral-400 bg-neutral-200/70 px-2.5 py-0.5 text-xs font-semibold text-neutral-800 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100; }
+    .chip { @apply inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-white px-2.5 py-1 text-xs font-medium dark:border-neutral-700 dark:bg-neutral-950; }
+    .tech { @apply card card-hover flex items-center gap-3 px-4 py-3 text-sm font-medium; }
+    .ico { display: inline-block; width: 1.25rem; height: 1.25rem; flex: none; font-size: .55rem; font-weight: 700; line-height: 1.25rem; text-align: center; color: inherit; }
+    .ico.ok { background: currentColor; }
+    .ico.fb { border: 1px solid currentColor; border-radius: 4px; }
+    .reveal { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+<a href="#home" class="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[60] focus:rounded-md focus:bg-white focus:px-3 focus:py-2 focus:text-neutral-900">Skip to content</a>
+
+<header class="sticky top-0 z-50 border-b border-neutral-200 bg-white/85 backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/85">
+  <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6" aria-label="Primary">
+    <a href="#home" class="text-lg font-extrabold tracking-tight">Neil Patrick</a>
+    <ul id="navLinks" class="hidden items-center gap-1 md:flex"></ul>
+    <div class="flex items-center gap-2">
+      <a data-cv class="btn-outline hidden !py-1.5 lg:inline-flex" aria-label="Download CV as PDF"><i data-i="download"></i>CV</a>
+      <button id="themeBtn" class="btn-outline !px-2.5 !py-2.5" aria-label="Toggle dark and light theme"><span id="themeIco"></span></button>
+      <button id="menuBtn" class="btn-outline !px-2.5 !py-2.5 md:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><span id="menuIco"></span></button>
+    </div>
+  </nav>
+  <div id="mobileMenu" class="hidden border-t border-neutral-200 px-4 pb-4 pt-2 dark:border-neutral-800 md:hidden">
+    <ul id="mobileLinks" class="flex flex-col"></ul>
+    <a data-cv class="btn-primary mt-3 w-full" aria-label="Download CV as PDF"><i data-i="download"></i>Download CV</a>
+  </div>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section id="home" class="mx-auto max-w-6xl px-4 pb-20 pt-16 sm:px-6 sm:pt-24">
+    <div class="grid items-center gap-12 lg:grid-cols-[1.2fr_1fr]">
+      <div class="reveal">
+        <p class="muted mb-4 text-sm font-medium">IT Student | Software Developer | Web &amp; Mobile Developer</p>
+        <h1 class="text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">Neil Patrick<br>Y. Atienza</h1>
+        <p class="muted mt-6 max-w-xl text-lg leading-relaxed">I'm a fourth-year Information Technology student passionate about building practical web and mobile applications. I enjoy developing application logic, database-driven systems, and integrated software solutions that solve real-world problems.</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#projects" class="btn-primary">View My Projects</a>
+          <a data-cv class="btn-outline" aria-label="Download CV as PDF"><i data-i="download"></i>Download CV</a>
+          <a href="https://github.com/neilpatri" target="_blank" rel="noopener noreferrer" class="btn-outline" aria-label="GitHub profile (opens in a new tab)"><i data-slug="github" data-label="GitHub"></i>GitHub</a>
+        </div>
+      </div>
+      <div class="reveal hidden lg:block" aria-hidden="true">
+        <div class="card overflow-hidden font-mono text-sm shadow-sm">
+          <div class="flex gap-1.5 border-b border-neutral-200 px-4 py-3 dark:border-neutral-800">
+            <span class="h-2.5 w-2.5 rounded-full bg-neutral-300 dark:bg-neutral-700"></span><span class="h-2.5 w-2.5 rounded-full bg-neutral-300 dark:bg-neutral-700"></span><span class="h-2.5 w-2.5 rounded-full bg-neutral-300 dark:bg-neutral-700"></span>
+          </div>
+<pre class="overflow-hidden p-5 leading-7 text-neutral-700 dark:text-neutral-300"><span class="text-neutral-400">const</span> developer = {
+  name: <span class="text-neutral-900 dark:text-white">"Neil Patrick"</span>,
+  focus: [<span class="text-neutral-900 dark:text-white">"web"</span>, <span class="text-neutral-900 dark:text-white">"mobile"</span>],
+  school: <span class="text-neutral-900 dark:text-white">"RSU"</span>,
+  level: <span class="text-neutral-900 dark:text-white">"4th year"</span>,
+  status: <span class="text-neutral-900 dark:text-white">"building"</span>
+};</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="border-t border-neutral-200 py-20 dark:border-neutral-800">
+    <div class="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1.4fr_1fr]">
+      <div class="reveal">
+        <h2 class="h2">About Me</h2>
+        <p class="muted mt-6 max-w-2xl leading-relaxed">I'm a fourth-year Bachelor of Science in Information Technology student at Romblon State University with hands-on experience developing web, mobile, and AI-powered applications. My experience includes application logic, database-driven systems, authentication and authorization, administrative tools, and API integration.</p>
+        <p class="muted mt-4 max-w-2xl leading-relaxed">I approach software development with logical and analytical thinking, a practical mindset, and a focus on debugging, problem-solving, and building reliable applications.</p>
+      </div>
+      <dl id="info" class="card reveal divide-y divide-neutral-200 self-start text-sm dark:divide-neutral-800"></dl>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="border-t border-neutral-200 py-20 dark:border-neutral-800">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <h2 class="h2 reveal">Projects</h2>
+      <div id="projectGrid" class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
+    </div>
+  </section>
+
+  <!-- Tech stack -->
+  <section id="stack" class="border-t border-neutral-200 py-20 dark:border-neutral-800">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <h2 class="h2 reveal">Tech Stack</h2>
+      <div id="stackGroups" class="mt-10 space-y-10"></div>
+    </div>
+  </section>
+
+  <!-- Certificates -->
+  <section id="certificates" class="border-t border-neutral-200 py-20 dark:border-neutral-800">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <h2 class="h2 reveal">Certificates</h2>
+      <div id="certGrid" class="mt-10 grid gap-6 sm:grid-cols-2"></div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="border-t border-neutral-200 py-20 dark:border-neutral-800">
+    <div class="reveal mx-auto max-w-6xl px-4 sm:px-6">
+      <h2 class="h2">Contact</h2>
+      <p class="muted mt-4 max-w-xl">Open to internship opportunities, entry-level roles, and collaboration. Get in touch.</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a id="mailBtn" class="btn-primary"><i data-i="mail"></i><span id="mailText"></span></a>
+        <a href="https://github.com/neilpatri" target="_blank" rel="noopener noreferrer" class="btn-outline" aria-label="GitHub profile (opens in a new tab)"><i data-slug="github" data-label="GitHub"></i>github.com/neilpatri</a>
+        <a id="fbBtn" hidden target="_blank" rel="noopener noreferrer" class="btn-outline" aria-label="Facebook profile (opens in a new tab)"><i data-slug="facebook" data-label="Facebook"></i>Neil Patrick Yap Atienza</a>
+        <a id="phoneBtn" hidden class="btn-outline"><span id="phoneText">+63 910 376 3750</span></a>
+      </div>
+      <p class="muted mt-6 flex items-center gap-2 text-sm"><i data-i="pin"></i>Odiongan, Romblon, Philippines</p>
+    </div>
+  </section>
+</main>
+
+<footer class="border-t border-neutral-200 py-8 dark:border-neutral-800">
+  <div class="mx-auto flex max-w-6xl flex-col gap-4 px-4 text-sm sm:px-6 md:flex-row md:items-center md:justify-between">
+    <div>
+      <p class="font-semibold">Neil Patrick Y. Atienza</p>
+      <p class="muted">Software Developer | Web &amp; Mobile Development</p>
+    </div>
+    <div class="muted flex flex-wrap items-center gap-x-5 gap-y-2">
+      <a href="https://github.com/neilpatri" target="_blank" rel="noopener noreferrer" class="underline-offset-4 hover:underline">GitHub</a>
+      <a id="footMail" class="underline-offset-4 hover:underline">Email</a>
+      <span>&copy; <span id="year"></span> Neil Patrick Y. Atienza</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Project details dialog -->
+<dialog id="dlg" class="w-[min(92vw,34rem)] rounded-xl border border-neutral-300 bg-white p-0 text-neutral-900 backdrop:bg-black/60 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100" aria-labelledby="dlgTitle">
+  <div class="p-6">
+    <div class="flex items-start justify-between gap-4">
+      <h3 id="dlgTitle" class="text-xl font-bold"></h3>
+      <button id="dlgClose" class="btn-outline !px-2 !py-2" aria-label="Close project details"><i data-i="x"></i></button>
+    </div>
+    <div id="dlgBody" class="mt-4 space-y-4 text-sm"></div>
+  </div>
+</dialog>
+
+<script>
+/* ================= CONFIGURATION ================= */
+const CONFIG = {
+  cvUrl: 'assets/Atienza_NeilPatrick_Resume.pdf', //my cv
+  cvFilename: 'Atienza_NeilPatrick_Resume.pdf',
+  email: 'patienza860@gmail.com',
+  github: 'https://github.com/neilpatri',
+  sgms: 'https://www.facebook.com/SoundsOfGraceMusicStudio',
+  iconBase: 'https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/' // Simple Icons; missing icons fall back to a labelled box
+};
+
+const INFO = [
+  ['Education:', 'BS Information Technology'],
+  ['Academic level:', 'Fourth Year'],
+  ['University:', 'Romblon State University - Main Campus'],
+  ['Location:', 'Odiongan, Romblon, Philippines'],
+  ['GitHub:', 'neilpatri', CONFIG.github],
+  ['Experience:', 'Music Teacher at Sounds of Grace Music Studio', CONFIG.sgms]
+];
+
+// status: 'completed' | 'in-progress' | 'archived' | '' (no badge). Only SVConnect is confirmed.
+// Optional: repositoryUrl, demoUrl, image (screenshot path). Add them only when real.
+const PROJECTS = [
+  {
+    title: 'SVConnect Mobile App', fullName: 'SVConnect \u2014 Mobile Application & Web Administration System',
+    description: 'Developed a mobile application and web administration system for cooperative members, featuring core financial functionality, digital transaction management, and administrative modules. Designed Firebase Realtime Database structures and implemented authentication and authorization for role-based access to member and financial data. Integrated frontend and backend components using JavaScript, Tailwind CSS, and Capacitor to deliver a cross-platform application.',
+    summary: 'Mobile app and web administration system for cooperative members, with financial features and role-based access.',
+    role: 'Main Developer', date: 'January 2025', status: 'completed',
+    technologies: [['JavaScript','javascript'],['Tailwind CSS','tailwindcss'],['Capacitor','capacitor'],['Firebase Firestore','firebase'], ['Supabase','supabase'], ['Firebase Authentication','firebase']],
+    repositoryUrl: 'https://github.com/neilpatri/SVConnect', demoUrl: 'https://www.youtube.com/watch?v=PozM4bs-g7s&list=RD-qaZPikeMqE&index=16', image: 'project_img/SVConnectApp.jpg'
+  },
+  {
+    title: 'SVConnect Admin', fullName: 'SVConnect \u2014 Mobile Application & Web Administration System',
+    description: 'Developed a mobile application and web administration system for cooperative members, featuring core financial functionality, digital transaction management, and administrative modules. Designed Firebase Realtime Database structures and implemented authentication and authorization for role-based access to member and financial data. Integrated frontend and backend components using JavaScript, Tailwind CSS, and Capacitor to deliver a cross-platform application.',
+    summary: 'Mobile app and web administration system for cooperative members, with financial features and role-based access.',
+    role: 'Main Developer', date: 'January 2025', status: 'completed',
+    technologies: [['JavaScript','javascript'],['Tailwind CSS','tailwindcss'],['Capacitor','capacitor'],['Firebase Firestore','firebase'], ['Supabase','supabase'], ['Firebase Authentication','firebase']],
+    repositoryUrl: 'https://github.com/quintuckyy/Admin-SVConnect', demoUrl: 'https://www.youtube.com/watch?v=PozM4bs-g7s&list=RD-qaZPikeMqE&index=16', image: ''
+  },
+  {
+    title: 'PIDAS', fullName: 'PIDAS \u2014 Power Foods Inventory & Delivery Administration System',
+    description: 'Developed a centralized web-based administrative system for Power Foods, consolidating product, inventory, delivery, driver, and vendor records into a unified platform. Designed database structures and administrative features using Supabase, and applied systematic debugging to improve the reliability of core system functions.',
+    summary: 'Centralized web admin system consolidating product, inventory, delivery, driver, and vendor records.',
+    role: 'Developer', date: 'June 2026', status: '',
+    technologies: [['Supabase','supabase'],['Database Management',''], ['JavaScript','javascript'], ['Tailwind CSS','tailwindcss']], // Add JavaScript here once confirmed for this project
+    repositoryUrl: 'https://github.com/neilpatri/PIDAS', demoUrl: 'https://github.com/neilpatri/PIDAS', image: 'project_img/pidas.jpg'
+  },
+  {
+    title: 'JARVIS', fullName: 'JARVIS \u2014 AI Voice Assistant',
+    description: 'Developed a real-time AI voice assistant using Python, LiveKit, and Google Gemini Realtime. Integrated APIs and real-time communication services to interpret spoken commands and generate natural voice responses. Connected and tested application components end-to-end to support stable live voice interactions.',
+    summary: 'Real-time AI voice assistant built with Python, LiveKit, and Google Gemini Realtime.',
+    role: 'Developer', date: 'April 2026', status: '',
+    technologies: [['Python','python'],['LiveKit','livekit'],['Google Gemini','googlegemini'],['API Integration',''], ['JavaScript','javascript'], ['Tailwind CSS','tailwindcss']],
+    repositoryUrl: 'https://github.com/neilpatri/JARVIS', demoUrl: 'https://github.com/neilpatri/JARVIS', image: 'project_img/jarvis.jpg'
+  }
+];
+
+const STACK = {
+  'Programming Languages': [['JavaScript','javascript'],['Java','openjdk'],['Python','python'],['HTML5','html5'],['CSS3','css3'],['SQL','']],
+  'Frontend & Styling': [['Tailwind CSS','tailwindcss']],
+  'Backend & Databases': [['Node.js','nodedotjs'],['MySQL','mysql'],['Firebase Realtime Database','firebase'],['Firebase Authentication','firebase'],['Supabase','supabase']],
+  'Mobile Development': [['Capacitor','capacitor'],['Android Studio','androidstudio']],
+  'Development Tools': [['Git','git'],['GitHub','github'],['Visual Studio Code','visualstudiocode'],['NetBeans','apachenetbeanside'],['XAMPP','xampp'],['NPM','npm'],['Figma','figma']]
+};
+
+// file: path to certificate image/PDF; issuer/date only when confirmed. "View Certificate" appears when file or url is set.
+const CERTS = [
+  { title: 'Certified Artificial Intelligence Security & Risk (Red Team)', issuer: 'Red Team Leaders', date: 'February 02, 2026', file: '', url: 'cert_png/redteam.jpg', image: 'cert_png/redteam.jpg' },
+  { title: 'Introduction to Cybersecurity \u2014 Cisco', issuer: 'Cisco', date: 'February 02, 2026', file: '', url: 'cert_png/cybersecurity.jpg', image: 'cert_png/cybersecurity.jpg' },
+  { title: 'Networking Basics \u2014 Cisco', issuer: 'Cisco', date: 'August 20, 2024', file: '', url: 'cert_png/networking.jpg', image: 'cert_png/networking.jpg' },
+  { title: 'Introduction to Packet Tracer \u2014 Cisco', issuer: 'Cisco', date: 'August 20, 2024', file: '', url: 'cert_png/packetTracer.jpg', image: 'cert_png/packetTracer.jpg' }
+];
+/* ===================================================================================== */
+
+const STATUS = {
+  completed: ['check', '\u2713 Completed'],
+  'in-progress': ['clock', '\u25F7 In Progress'],
+  archived: ['archive', '\u25CC Archived']
+};
+const SECTIONS = [['Home','#home'],['About','#about'],['Projects','#projects'],['Tech Stack','#stack'],['Certificates','#certificates'],['Contact','#contact']];
+
+const P = { // small inline icon set (Lucide-style paths)
+  download: '<path d="M12 3v12m0 0 4-4m-4 4-4-4M4 19h16"/>',
+  mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+  pin: '<path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+  x: '<path d="M18 6 6 18M6 6l12 12"/>',
+  menu: '<path d="M4 6h16M4 12h16M4 18h16"/>',
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+  moon: '<path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/>',
+  check: '<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  archive: '<circle cx="12" cy="12" r="9" stroke-dasharray="3 3"/>',
+  github: '<path d="M9 19c-4 1-4-2-6-2m12 4v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.500 2.800 5.400 3.100 5.400 3.100a4.200 4.200 0 0 0-.1 3.200A4.600 4.600 0 0 0 4 9.500c0 4.600 2.700 5.700 5.500 6-.6.600-.6 1.200-.5 2V21"/>',
+  external: '<path d="M14 4h6v6m0-6L10 14M20 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5"/>',
+  file: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/>'
+};
+const svg = (n, c = 'h-4 w-4') => `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[n]}</svg>`;
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+// Brand icon: monochrome via CSS mask so it follows the theme; falls back to a labelled box if unavailable.
+function brandIcon(slug, label) {
+  const s = document.createElement('span');
+  s.className = 'ico';
+  s.setAttribute('aria-hidden', 'true');
+  const fallback = () => { s.className = 'ico fb'; s.textContent = label.replace(/[^A-Za-z]/g, '').slice(0, 2); };
+  if (!slug) { fallback(); return s; }
+  const url = CONFIG.iconBase + slug + '.svg';
+  const probe = new Image();
+  probe.onload = () => { s.classList.add('ok'); s.style.cssText = `-webkit-mask:url(${url}) center/contain no-repeat;mask:url(${url}) center/contain no-repeat`; };
+  probe.onerror = fallback;
+  probe.src = url;
+  return s;
+}
+
+function badge(status) {
+  const b = STATUS[status];
+  return b ? `<span class="badge">${svg(b[0], 'h-3.5 w-3.5')}${b[1].slice(2)}</span>` : '';
+}
+
+/* --- Navigation --- */
+const linkHtml = (cls) => SECTIONS.map(([t, h]) => `<li><a href="${h}" class="${cls}">${t}</a></li>`).join('');
+$('#navLinks').innerHTML = linkHtml('nav-link');
+$('#mobileLinks').innerHTML = linkHtml('nav-link block !py-3');
+const menu = $('#mobileMenu'), menuBtn = $('#menuBtn');
+const setMenu = (open) => {
+  menu.classList.toggle('hidden', !open);
+  menuBtn.setAttribute('aria-expanded', open);
+  menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  $('#menuIco').innerHTML = svg(open ? 'x' : 'menu', 'h-5 w-5');
+};
+setMenu(false);
+menuBtn.onclick = () => setMenu(menu.classList.contains('hidden'));
+menu.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menu.classList.contains('hidden')) { setMenu(false); menuBtn.focus(); } });
+
+/* --- Theme --- */
+const root = document.documentElement;
+const paintTheme = () => { $('#themeIco').innerHTML = svg(root.classList.contains('dark') ? 'sun' : 'moon', 'h-5 w-5'); };
+$('#themeBtn').onclick = () => {
+  root.classList.toggle('dark');
+  try { localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light'); } catch (e) {}
+  paintTheme();
+};
+paintTheme();
+
+/* --- Static icons and links --- */
+document.querySelectorAll('i[data-i]').forEach((el) => el.replaceWith(Object.assign(document.createElement('span'), { innerHTML: svg(el.dataset.i), className: 'inline-flex' })));
+document.querySelectorAll('i[data-slug]').forEach((el) => el.replaceWith(brandIcon(el.dataset.slug, el.dataset.label)));
+document.querySelectorAll('a[data-cv]').forEach((a) => { a.href = CONFIG.cvUrl; a.setAttribute('download', CONFIG.cvFilename); });
+$('#mailBtn').href = $('#footMail').href = 'mailto:' + CONFIG.email;
+$('#mailText').textContent = CONFIG.email;
+$('#year').textContent = new Date().getFullYear();
+
+/* --- About --- */
+$('#info').innerHTML = INFO.map(([k, v, href]) => `<div class="flex flex-col gap-0.5 px-5 py-3 sm:flex-row sm:justify-between sm:gap-4"><dt class="muted">${k}</dt><dd class="font-medium sm:text-right">${href ? `<a href="${href}" target="_blank" rel="noopener noreferrer" class="underline underline-offset-4">${esc(v)}</a>` : esc(v)}</dd></div>`).join('');
+
+/* --- Projects --- */
+const visual = (p) => p.image
+  ? `<img src="${esc(p.image)}" alt="${esc(p.title)} screenshot" class="h-40 w-full rounded-lg border border-neutral-200 object-cover dark:border-neutral-800" loading="lazy">`
+  : `<div class="flex h-40 items-end rounded-lg border border-neutral-200 bg-[linear-gradient(135deg,transparent_48%,rgb(163_163_163/.25)_49%,rgb(163_163_163/.25)_51%,transparent_52%)] bg-[length:18px_18px] p-4 dark:border-neutral-800" role="img" aria-label="Placeholder for ${esc(p.title)} screenshot"><span class="font-mono text-xs text-neutral-500">${esc(p.title)}</span></div>`;
+const links = (p) => [
+  p.repositoryUrl && `<a href="${esc(p.repositoryUrl)}" target="_blank" rel="noopener noreferrer" class="btn-outline !px-3 !py-1.5">${svg('github')}Repository</a>`,
+  p.demoUrl && `<a href="${esc(p.demoUrl)}" target="_blank" rel="noopener noreferrer" class="btn-outline !px-3 !py-1.5">${svg('external')}Take a Look</a>`
+].filter(Boolean).join('');
+const techChips = (p) => p.technologies.map(([n, s]) => `<li class="chip" data-t="${esc(n)}" data-s="${s}"><span class="ph"></span>${esc(n)}</li>`).join('');
+
+$('#projectGrid').innerHTML = PROJECTS.map((p, i) => `
+  <article class="card card-hover reveal flex flex-col gap-4 p-5 ${p.status === 'completed' ? 'border-neutral-400 dark:border-neutral-600' : ''}">
+    ${visual(p)}
+    <div class="flex items-start justify-between gap-3"><h3 class="text-xl font-bold">${esc(p.title)}</h3>${badge(p.status)}</div>
+    <p class="muted text-sm leading-relaxed">${esc(p.summary)}</p>
+    <p class="text-xs"><span class="muted">Role:</span> <strong>${esc(p.role)}</strong> <span class="muted">&nbsp;|&nbsp; ${esc(p.date)}</span></p>
+    <ul class="flex flex-wrap gap-2" aria-label="Technologies">${techChips(p)}</ul>
+    <div class="mt-auto flex flex-wrap gap-2 pt-2"><button class="btn-primary !px-3 !py-1.5" data-open="${i}">View details</button>${links(p)}</div>
+  </article>`).join('');
+document.querySelectorAll('#projectGrid li[data-t]').forEach((li) => li.querySelector('.ph').replaceWith(brandIcon(li.dataset.s, li.dataset.t)));
+
+const dlg = $('#dlg');
+$('#projectGrid').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-open]'); if (!b) return;
+  const p = PROJECTS[b.dataset.open];
+  $('#dlgTitle').textContent = p.fullName;
+  $('#dlgBody').innerHTML = `${badge(p.status)}<p class="muted leading-relaxed">${esc(p.description)}</p>
+    <p><span class="muted">Role:</span> <strong>${esc(p.role)}</strong><br><span class="muted">Date:</span> <strong>${esc(p.date)}</strong></p>
+    <ul class="flex flex-wrap gap-2">${p.technologies.map(([n]) => `<li class="chip">${esc(n)}</li>`).join('')}</ul>
+    <div class="flex flex-wrap gap-2">${links(p)}</div>`;
+  dlg.showModal();
+});
+$('#dlgClose').onclick = () => dlg.close();
+dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+
+/* --- Tech stack --- */
+$('#stackGroups').innerHTML = Object.entries(STACK).map(([g, items]) => `
+  <div class="reveal"><h3 class="mb-4 text-lg font-bold">${g}</h3>
+  <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">${items.map(([n, s]) => `<li class="tech" data-t="${esc(n)}" data-s="${s}"><span class="ph"></span>${esc(n)}</li>`).join('')}</ul></div>`).join('');
+document.querySelectorAll('#stackGroups li[data-t]').forEach((li) => li.querySelector('.ph').replaceWith(brandIcon(li.dataset.s, li.dataset.t)));
+
+/* --- Certificates --- */
+$('#certGrid').innerHTML = CERTS.map((c) => {
+  const href = c.url || c.file;
+  const img = c.image
+    ? `<img src="${esc(c.image)}" alt="Certificate: ${esc(c.title)}" class="h-40 w-full rounded-lg border border-neutral-200 object-cover dark:border-neutral-800" loading="lazy">`
+    : `<div class="flex h-40 items-center justify-center rounded-lg border border-dashed border-neutral-300 text-neutral-400 dark:border-neutral-700" role="img" aria-label="Certificate image placeholder">${svg('file', 'h-8 w-8')}</div>`;
+  const meta = [c.issuer, c.date].filter(Boolean).join(' | ');
+  return `<article class="card card-hover reveal flex flex-col gap-4 p-5">${img}
+    <h3 class="font-bold leading-snug">${esc(c.title)}</h3>
+    ${meta ? `<p class="muted text-sm">${esc(meta)}</p>` : ''}
+    ${href ? `<a href="${esc(href)}" target="_blank" rel="noopener noreferrer" class="btn-outline mt-auto self-start !px-3 !py-1.5">${svg('external')}View Certificate</a>` : ''}</article>`;
+}).join('');
+
+/* --- Reveal on scroll --- */
+const io = 'IntersectionObserver' in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.08 }) : null;
+document.querySelectorAll('.reveal').forEach((el) => io ? io.observe(el) : el.classList.add('in'));
+</script>
+</body>
+</html>
